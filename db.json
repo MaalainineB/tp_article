@@ -11,6 +11,18 @@
       "title": "Angular 3",
       "link": "typicode 3",
       "id": 4
+    },
+    {
+      "id": 5,
+      "title": "Google",
+      "link": "http://google.fr",
+      "votes": 0
+    },
+    {
+      "id": 6,
+      "title": "Angular 4",
+      "link": "http://angular.io",
+      "votes": 0
     }
   ],
   "comments": [

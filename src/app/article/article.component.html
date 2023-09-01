@@ -1,13 +1,8 @@
-<p>article works!</p>
-<div>
-    <div>{{article.votes}}</div>
-    <div>Points</div>
+<div class="article">
+    <h4>Title: {{ article.title }}</h4>
+    <h4>Link: <a href="{{ article.link }}">{{ article.link }}</a></h4>
+    <h4>Votes: {{ article.votes }}</h4>
+    <button (click)="voteUp()">Vote Up</button>
+    <button (click)="voteDown()">Vote Down</button>
+    <button (click)="deleteArticle(article)">Delete</button>
 </div>
-<div>
-    <a href="{{article.link}}">{{article.title}}</a>
-</div>
-<button (click)="voteUp()">vote up</button>
-<button (click)="voteDown()">vote down</button>
-<!--<button (click)="deleteArticle(article)">Delete</button> -->
-<button (click)="deleteArticle(article)">Delete</button>
-
