@@ -1,19 +1,39 @@
-<form>
+<!-- Remarque: Normalement ici je doit appeler le composant <app-article-template-driven-form>
+  mais quand je fais ça la méthode addArticle() ça ne marche pas à cause de l'erreur suivant:
+   TypeError: Cannot read properties of undefined (reading 'push'). Par contre quand
+  je mets la formulaire directement ici la méthode marche parfaitement
+-->
+<form (ngSubmit)="addArticle(newTitle,newLink)" #loginForm="ngForm" novalidate>
   <h3>Add a Link</h3>
   <div>
-    <label for="title">Title:</label> <input name="title" #newTitle placeholder="Enter the title">
+      <label for="title">title</label>
+      <div class="col-sm-6">
+          <input type="text" class="form-control" id="title"
+          placeholder="title" #newTitle required [(ngModel)]="model.title" name="title"
+          #title="ngModel" minlength="3">
+          <div [hidden]="title.valid || title.pristine"
+          class="alert alert-danger"> title is required </div>
+          <div *ngIf="title?.errors?.['minlength']">
+              Title must be at least 3 caracters long.
+          </div>
+      </div>
   </div>
   <div>
-    <label for="link">Link:</label> <input name="link" #newLink placeholder="Enter the link">
+      <label for="link">link</label>
+      <div>
+          <input type="text" id="link"
+          placeholder="link" #newLink required [(ngModel)]="model.link" name="link"
+          #link="ngModel">
+          <div [hidden]="link.valid || link.pristine"> link is required </div>
+      </div>
   </div>
-  <button (click)="addArticle(newTitle,newLink)">Submit Link</button>
+  <div>
+      <div>
+          <button type="submit" [disabled]="!loginForm.form.valid">Submit</button>
+      </div>
+  </div>
 </form>
-<!--
-<app-article *ngFor="let article of articles"
-[article]="article"></app-article>
--->
+
 <div>
-  <app-article *ngFor="let article of sortedArticles()" [article]="article"
-  (articleSelected)="selectArticle($event)">
-  </app-article>
+  <app-article *ngFor="let article_parent of sortedArticles()" [article_enf]="article_parent" (removeArticle)="removeArticle($event)"></app-article>
 </div>

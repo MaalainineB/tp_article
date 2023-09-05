@@ -8,20 +8,21 @@
   ],
   "articles": [
     {
-      "title": "Angular 3",
-      "link": "typicode 3",
-      "id": 4
+      "id": 7,
+      "title": "xvc",
+      "link": "cxv",
+      "votes": 0
     },
     {
-      "id": 5,
+      "id": 9,
       "title": "Google",
       "link": "http://google.fr",
       "votes": 0
     },
     {
-      "id": 6,
-      "title": "Angular 4",
-      "link": "http://angular.io",
+      "id": 10,
+      "title": "fgddfg",
+      "link": "fdgdfg",
       "votes": 0
     }
   ],

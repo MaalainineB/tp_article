@@ -1,8 +1,8 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Article } from './article/article.model';
 import { ArticleService } from './article.service';
 import { HttpserviceService } from './httpservice.service';
-
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -11,60 +11,33 @@ import { HttpserviceService } from './httpservice.service';
 })
 export class AppComponent implements OnInit {
 
-  title = 'TP2';
-  articles: Article[] = [] // <-- component property
+  model = new Article('','',0)
 
-  updateOn: boolean = false
-  selectedArticle: Article = new Article('dummy','link')
+  title = 'articleApp';
 
-  constructor(private service: HttpserviceService) {
+  articles_parents: Article[] = []
+
+  constructor(private service:HttpserviceService) {
   }
-
   ngOnInit(): void {
-    this.service
-    .getArticles()
-    .subscribe(restArticles => this.articles = restArticles)
+    this.getArticles()
   }
 
-//addArticle(title: HTMLInputElement, link: HTMLInputElement) {
-  //const newArticle = new Article(title.value,link.value,0 )
-    
-  //  this.service.postArticle(newArticle).subscribe((addedArticle) => {
-    //  this.articles.push(addedArticle)
-  //  })
-//    return false
-//    }
-
-
-  addArticle(title: HTMLInputElement, link: HTMLInputElement) {
-    console.log(`input ${title.value}`)
-    this.service.addArticle(new Article(title.value,link.value)).subscribe((data) => {
-      this.getArticles()
-    })
-    location.reload()
-    return false
-    }
-
-    selectArticle(article: Article) {
-      console.log("je suis arrivé ici qm")
-      this.selectedArticle = article
-      this.deleteArticle(article.id)
-    }
-
-    deleteArticle(id: number) {
-      this.service.deleteArticle(id).subscribe((data) => {
-        this.getArticles()
-      })
-    }
-
-  getArticles(){
-    this.service.getArticles().subscribe((a) => (this.articles = a))
+  addArticle(newTitle:HTMLInputElement, newLink:HTMLInputElement) {
+    this.service.addArticle(newTitle,newLink);
   }
 
-  sortedArticles(): Article[] {
-      return this.articles.sort((a: Article, b: Article) => b.votes - a.votes)
+  removeArticle(article: Article) {
+    this.service.deleteArticle(article.id).subscribe((date)=>{this.getArticles()})
+//    this.service.removeArticle(article)
   }
 
-
+  sortedArticles():Article[] {
+    return this.articles_parents.sort((a: Article, b: Article) => b.votes - a.votes)
+  }
+ 
+  getArticles() {
+    this.service.getArticles().subscribe(restArticles => this.articles_parents = restArticles)
+  }
 
 }

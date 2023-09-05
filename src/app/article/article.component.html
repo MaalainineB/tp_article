@@ -1,8 +1,12 @@
 <div class="article">
-    <h4>Title: {{ article.title }}</h4>
-    <h4>Link: <a href="{{ article.link }}">{{ article.link }}</a></h4>
-    <h4>Votes: {{ article.votes }}</h4>
-    <button (click)="voteUp()">Vote Up</button>
-    <button (click)="voteDown()">Vote Down</button>
-    <button (click)="deleteArticle(article)">Delete</button>
+<div>Points:</div>
+<div>
+    {{article_enf.votes}}
+</div>
+<div>
+    <a href="{{article_enf.link}}">{{article_enf.title}}</a>
+</div>
+<button (click)="voteUp()">+</button>
+<button (click)="voteDown()">-</button>
+<button (click)="remove(article_enf)">x</button>
 </div>

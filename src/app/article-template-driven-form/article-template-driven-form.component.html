@@ -1,0 +1,31 @@
+<form (ngSubmit)="addArticle(newTitle,newLink)" #loginForm="ngForm" novalidate>
+    <h3>Add a Link</h3>
+    <div>
+        <label for="title">title</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" id="title"
+            placeholder="title" #newTitle required [(ngModel)]="model.title" name="title"
+            #title="ngModel" minlength="3">
+            <div [hidden]="title.valid || title.pristine"
+            class="alert alert-danger"> title is required </div>
+            <div *ngIf="title?.errors?.['minlength']">
+                Title must be at least 3 caracters long.
+            </div>
+        </div>
+    </div>
+    <div>
+        <label for="link">link</label>
+        <div>
+            <input type="text" id="link"
+            placeholder="link" #newLink required [(ngModel)]="model.link" name="link"
+            #link="ngModel">
+            <div [hidden]="link.valid || link.pristine"> link is required </div>
+        </div>
+    </div>
+    <div>
+        <div>
+            <button type="submit" [disabled]="!loginForm.form.valid">Submit</button>
+        </div>
+    </div>
+</form>
+
